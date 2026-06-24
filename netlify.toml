@@ -1,0 +1,66 @@
+# Netlify Configuration for Delfi Tech Manufacturing Website
+
+# Build settings
+[build]
+  publish = "."
+  command = ""
+
+# Site metadata
+[site]
+  name = "delfi-tech-manufacturing"
+
+# Redirect rules
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Form settings
+[[forms]]
+  name = "contact"
+  honeypot = "bot-field"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Cache rules
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Context-specific settings (optional - for production vs preview)
+[context.production]
+  command = ""
+  publish = "."
+
+[context.preview]
+  command = ""
+  publish = "."
+
+# Deployment context settings
+[context.branch-deploy]
+  command = ""
+  publish = "."
